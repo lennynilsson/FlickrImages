@@ -1,27 +1,35 @@
-buildscript {
-    ext.kotlin_version = '1.0.4'
-    ext.support_version = '23.4.0'
-
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-    }
-}
-
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.jetbrains.kotlin.kapt'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+buildscript {
+
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$rootProject.kotlinVersion"
+    }
+}
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.3"
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         applicationId "se.bylenny.skeleton"
-        minSdkVersion 14
-        targetSdkVersion 23
+        testApplicationId "se.bylenny.skeleton.test"
+        multiDexEnabled true
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
@@ -31,48 +39,36 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+    dexOptions {
+        javaMaxHeapSize "4g"
     }
 }
 
-kapt {
-    generateStubs = true
-}
-
 dependencies {
+
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$rootProject.kotlinVersion"
 
     compile 'com.squareup.picasso:picasso:2.5.2'
 
-    // LoganSquare
-    kapt 'com.bluelinelabs:logansquare-compiler:1.3.6'
-    compile 'com.bluelinelabs:logansquare:1.3.6'
-
     //Retrofit
-    compile 'com.github.aurae.retrofit2:converter-logansquare:1.4.1'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
     // Rx
-    compile 'io.reactivex:rxjava:1.2.0'
-    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.3'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
 
     // Google
-    compile "com.android.support:design:$support_version"
-    compile "com.android.support:appcompat-v7:$support_version"
-    compile "com.android.support:support-v4:$support_version"
-    compile "com.android.support:recyclerview-v7:$support_version"
-    compile "com.android.support:percent:$support_version"
-    compile "com.android.support:support-annotations:$support_version"
+    compile "com.android.support:design:$rootProject.supportLibraryVersion"
+    compile "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    compile "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    compile "com.android.support:support-annotations:$rootProject.supportLibraryVersion"
 
-    // Dagger
-    kapt 'com.github.lukaspili.autodagger2:autodagger2-compiler:1.1'
-    compile 'com.github.lukaspili.autodagger2:autodagger2:1.1'
-    kapt 'com.google.dagger:dagger-compiler:2.0.1'
-    compile 'com.google.dagger:dagger:2.0.1'
-    provided 'javax.annotation:jsr250-api:1.0'
-}
-repositories {
-    mavenCentral()
+    // KoDeIn
+    compile "com.github.salomonbrys.kodein:kodein:$kodeinVersion"
+
+
+    // Test
+    testCompile "junit:junit:$rootProject.junitVersion"
 }

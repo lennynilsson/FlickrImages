@@ -1,16 +1,36 @@
+ext {
+    buildToolsVersion = "26.0.1"
+    compileSdkVersion = 26
+
+    minSdkVersion = 19
+    minWearSdkVersion = 20
+    targetSdkVersion = 26
+
+    kotlinVersion               = '1.1.4-3'
+    kodeinVersion               = '4.1.0'
+
+    supportLibraryVersion       = '26.0.1'
+    junitVersion                = '4.12'
+    mockitoCoreVersion          = '2.10.0'
+    mockitoKotlinVersion        = '1.5.0'
+}
+
 buildscript {
-    ext.kotlin_version = '1.0.6'
     repositories {
         jcenter()
+        mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.android.tools.build:gradle:2.3.3'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
+        maven {
+            url "https://maven.google.com"
+        }
     }
 }
