@@ -1,4 +1,4 @@
-package se.bylenny.skeleton
+package se.bylenny.colorballs
 
 import android.app.Application
 

@@ -25,8 +25,8 @@ android {
 
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
-        applicationId "se.bylenny.skeleton"
-        testApplicationId "se.bylenny.skeleton.test"
+        applicationId "se.bylenny.colorballs"
+        testApplicationId "se.bylenny.colorballs.test"
         multiDexEnabled true
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
@@ -41,6 +41,9 @@ android {
     }
     dexOptions {
         javaMaxHeapSize "4g"
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
     }
 }
 

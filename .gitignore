@@ -3,6 +3,7 @@
 .DS_Store
 .idea
 build/
+app/build/
 captures
 .log-classes
 *.iml
