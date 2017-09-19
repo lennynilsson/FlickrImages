@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.canvas
 class MainActivity : AppCompatActivity() {
 
     private val renderer = GameRenderer()
+    private val controller = GameController()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,5 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         canvas.setRenderer(renderer)
+        canvas.setController(controller)
     }
 }
+

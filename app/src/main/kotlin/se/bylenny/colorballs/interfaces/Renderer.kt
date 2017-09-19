@@ -1,4 +1,4 @@
-package se.bylenny.colorballs
+package se.bylenny.colorballs.interfaces
 
 import android.graphics.Canvas
 
